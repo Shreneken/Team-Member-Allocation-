@@ -5,6 +5,10 @@ import Header from './Header';
 import Footer from './Footer';
 import Employees from './Employees';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import GroupedTeamMembers from './GroupedTeamMembers';
+import Nav from './Nav';
+import NotFound from './NotFound';
+
 
 function App() {
 
@@ -125,6 +129,7 @@ function App() {
 
   return (
     <Router>
+      <Nav />
       <Header selectedTeam={selectedTeam}
         teamMemberCount={employees.filter((employee) => employee.teamName === selectedTeam).length}
       />
@@ -136,7 +141,9 @@ function App() {
             handleTeamSelectionChange={handleTeamSelectionChange}
           />}>
         </Route>
-        <Route path="/GroupedTeamMembers" element={<GroupTeamMembers />}>
+        <Route path="/GroupedTeamMembers" element={<GroupedTeamMembers employees={employees} selectedTeam={selectedTeam} setTeam={setTeam} />}>
+        </Route>
+        <Route path="*" element={<NotFound />}>
         </Route>
       </Routes>
       <Footer />
